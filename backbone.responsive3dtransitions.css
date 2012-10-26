@@ -36,6 +36,10 @@ Base Styles
 	margin:0;
 }
 
+.threeDTrans-page {
+	padding:0 !important;
+}
+
 /*--------------------------------------
 Animation Styles
 ---------------------------------------*/

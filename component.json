@@ -1,0 +1,10 @@
+{
+  "name": "backbone.responsive3dtransitions",
+  "version": "0.1.0",
+  "main": ["backbone.responsive3dtransitions.js", "backbone.responsive3dtransitions.css", "backbone.responsive3dtransitions.min.js", "backbone.responsive3dtransitions.min.css"],
+  "dependencies": {
+    "backbone": "*"
+  },
+  "author": "Andrew Griffiths",
+  "license": "MIT"
+}

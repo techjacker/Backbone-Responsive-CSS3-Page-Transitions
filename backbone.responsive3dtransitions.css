@@ -1,0 +1,93 @@
+/*!
+ * backbone.responsive3dtransitions v0.1.0
+ * git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git
+ *
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions
+ *
+ * Copyright 2012, Andrew Griffiths
+ * Released under a MIT license
+ *
+ * Date: 2012-10-26
+ */
+
+/*--------------------------------------
+Base Styles
+---------------------------------------*/
+.threeDTrans {
+	position:absolute;
+}
+
+.threeDTrans .threeDTrans-outer-page-container {
+	text-align:left;
+}
+
+.threeDTrans .threeDTrans-outer-page-container, .threeDTrans .threeDTrans-inner-page-container, .threeDTrans .threeDTrans-page-container {
+	position: relative;
+}
+
+.threeDTrans .threeDTrans-outer-page-container, .threeDTrans .threeDTrans-inner-page-container {
+	overflow: hidden;
+}
+
+.threeDTrans .threeDTrans-page-container, .threeDTrans .threeDTrans-page {
+	width: 100%;
+	height: 100%;
+	margin:0;
+}
+
+/*--------------------------------------
+Animation Styles
+---------------------------------------*/
+.threeDTrans-outer-page-backwards {
+	left: -100%;
+}
+
+.threeDTrans-inner-page-container {
+	width: 200%;
+	overflow: hidden;
+}
+
+.threeDTrans-inner-page-container .threeDTrans-page-container {
+	width: 50%;
+}
+
+.threeDTrans-inner-page-container .threeDTrans-page {
+	position: absolute;
+}
+
+.threeDTrans-page:nth-child(2) {
+	left:100%;
+}
+
+/*--------------------------------------
+Animate
+---------------------------------------*/
+.threeDTrans-animate-transform {
+	-webkit-transition: -webkit-transform 0.7s ease-in-out;
+	-moz-transition: -moz-transform 0.7s ease-in-out;
+	-ms-transition: -ms-transform 0.7s ease-in-out;
+	-o-transition: -o-transform 0.7s ease-in-out;
+	transition: transform 0.7s ease-in-out;
+}
+
+.threeDTrans-animate-forwards, .threeDTrans-animate-backwards {
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+}
+
+.threeDTrans-animate-forwards {
+	-webkit-transform: translate3d(-100%,0,0);
+	-moz-transform: translate3d(-100%,0,0);
+	-ms-transform: translate3d(-100%,0,0);
+	-o-transform: translate3d(-100%,0,0);
+	transform: translate3d(-100%,0,0);
+}
+
+.threeDTrans-animate-backwards {
+	-webkit-transform: translate3d(100%,0,0);
+	-moz-transform: translate3d(100%,0,0);
+	-ms-transform: translate3d(100%,0,0);
+	-o-transform: translate3d(100%,0,0);
+	transform: translate3d(100%,0,0);
+}

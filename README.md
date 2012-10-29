@@ -304,6 +304,7 @@ ie this WON'T work
 
 ## Tests
 Run the tests:
+
 1. $ node server.js
 2. go to http://0.0.0.0:8124/test.html
 

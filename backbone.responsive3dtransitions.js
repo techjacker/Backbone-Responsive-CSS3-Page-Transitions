@@ -31,12 +31,13 @@
 
 		var threeDRouter = function (options) {
 
-			_(this).bindAll('pageTransitionAnimation', 'calculateDirection', 'triggerTransition', 'resetCssOutmostDiv', 'calculateCssOutmostDiv');
+			_(this).bindAll('pageTransitionAnimation', 'calculateDirection', 'triggerTransition', 'resetCssOutmostDiv', 'calculateCssOutmostDiv', 'clearUpAfterTransition');
 
 			if (options) {
 				this.wrapElement = options.wrapElement;
 				this.renderCallback = options.renderCallback;
 			}
+			this.callBackCounter = 0;
 			this.threeDEnabled = this.csstransforms3d();
 			this.domSetUp();
 
@@ -135,17 +136,21 @@
 
 			pageTransitionAnimation: function (direction, $innerContainer, $container) {
 
+				this.disableLinks(this.newView);
+
 				this.$outmostContainer.css(this.calculateCssOutmostDiv());
 				this.$outmostContainer.addClass('threeDTrans');
 
 				$innerContainer.css('height', ($(window).height() - 20));
 				$innerContainer.addClass('threeDTrans-inner-page-container threeDTrans-outer-page-' + direction);
+				// this.callBackCounter = 1;
 
 				// run the animation and attach the cleanup callback to the end of the animation
+				$container.on("transitionend.threeDTrans mozTransitionEnd.threeDTrans webkitTransitionEnd.threeDTrans oTransitionEnd.threeDTrans MSTransitionEnd.threeDTrans", _.bind(this.pageTransitionCallback, this));
 				$container.addClass('threeDTrans-animate-transform');
-				$container.addClass('threeDTrans-animate-' + direction);
-				$container.on("transitionend mozTransitionEnd webkitTransitionEnd oTransitionEnd MSTransitionEnd", _.bind(this.pageTransitionCallback, this));
-
+				setTimeout(function () {
+					$container.addClass('threeDTrans-animate-' + direction);
+				}, 50);
 				return true;
 			},
 
@@ -155,23 +160,32 @@
 					$pages = $container.find('.threeDTrans-page');
 
 				// prevent callback triggering twice (for each property transition change) and removing new page as well
-				if ($pages.size() > 1) {
-
-					$container.removeClass('threeDTrans-animate-transform');
-					$container.parent('#threeDTrans-inner-page-container').removeClass('threeDTrans-inner-page-container threeDTrans-outer-page-backwards threeDTrans-outer-page-forwards').css('height', '');
-
-					this.disposeView(this.prevView);
-
-					$container.removeClass('threeDTrans-animate-forwards threeDTrans-animate-backwards');
-
-					this.$outmostContainer.removeClass('threeDTrans');
-					this.resetCssOutmostDiv();
-
-					this.trigger('threeDTrans.pageTransitionComplete');
-					this.pageTransInProgress = false;
+				if (this.callBackCounter++ === 1 && $pages.size() === 2) {
+					// to be doubly sure that this isn't performed before the end of the transition then set the timeout > the animation duration (0.7s)
+					((event.type === 'transitionend') && window.setTimeout(this.clearUpAfterTransition, 500, $container)) || this.clearUpAfterTransition($container);
 				}
-
 			},
+
+			clearUpAfterTransition: function ($container) {
+
+				$container.off(".threeDTrans");
+
+				$container.removeClass('threeDTrans-animate-transform');
+				$container.parent('#threeDTrans-inner-page-container').removeClass('threeDTrans-inner-page-container threeDTrans-outer-page-backwards threeDTrans-outer-page-forwards').css('height', '');
+
+				$container.removeClass('threeDTrans-animate-forwards threeDTrans-animate-backwards');
+				this.disposeView(this.prevView);
+
+				this.$outmostContainer.removeClass('threeDTrans');
+				this.resetCssOutmostDiv();
+
+				this.trigger('threeDTrans.pageTransitionComplete');
+
+				this.callBackCounter = 0;
+				this.enableLinks(this.newView);
+				this.pageTransInProgress = false;
+			},
+
 
 			disposeView: function (View) {
 
@@ -205,12 +219,49 @@
 					self.disposeView(self.prevView);
 
 					this.pageTransInProgress = false;
+					this.callBackCounter = 0;
 					this.trigger('threeDTrans.pageTransitionComplete');
 				}
 			},
-			csstransforms3d: function () {
-				return ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix());
+			disableLinks: function (view) {
+				setTimeout(function () {
+					view.$('a').on('threeDTrans.click', function (event) {
+						event && event.preventDefault() && event.stopPropagation();
+					});
+				}, 50);
 			},
+			enableLinks: function (view) {
+				setTimeout(function () {
+					view.$('a').off('threeDTrans.click');
+				}, 50);
+			},
+			csstransforms3d: function () {
+				// return ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix());
+				var el = document.createElement('p'),
+					has3d,
+					transforms = {
+						'WebkitTransform': '-webkit-transform',
+						'OTransform': '-o-transform',
+						'MSTransform': '-ms-transform',
+						'MozTransform': '-moz-transform',
+						'Transform': 'transform'
+					};
+
+				// Add it to the body to get the computed style.
+				document.body.insertBefore(el, null);
+
+				for (var t in transforms) {
+					if (el.style[t] !== undefined) {
+						el.style[t] = "translate3d(1px,1px,1px)";
+						has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+					}
+				}
+
+				document.body.removeChild(el);
+
+				return (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+			},
+
 			calculateDirection: function (newPageHash, lastPageHash, direction) {
 
 				var calculateDepth = _.bind(function (str) {
@@ -242,12 +293,13 @@
 
 				var renderCb, viewInitOpts, direction, renderParams;
 
-				if (this.pageTransInProgress === true) {
+				if (this.pageTransInProgress === true || this.callBackCounter !== 0) {
 					return false;
 				}
 
 				// stop animations from queuing up
 				this.pageTransInProgress = true;
+				this.callBackCounter = 1;
 
 				if (opts) {
 					renderParams = opts.renderParams;

@@ -1,8 +1,8 @@
 # Backbone Responsive CSS3 Page Transitions
 
-Adds responsive 3d CSS3 page transitions to backbone.
+Adds responsive CSS3 page transitions to backbone.
 
-If the browser does not support CSS3 3d hardware accelerated transitions then the plugin falls back to plain old $el.html('new html') replacing html.
+If the browser does not support CSS3 hardware accelerated transitions then the plugin falls back to plain old $el.html('new html') replacing html.
 
 ### [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 Tested to work with the following reponsive CSS frameworks:
@@ -15,7 +15,7 @@ Tested to work with the following reponsive CSS frameworks:
 
 [Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) of the CSS frameworks @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 
-Demo code available from the [github repo](https://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos)
+Demo code available from the [github repo](https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos)
 
 
 ## Getting Started
@@ -290,7 +290,7 @@ Apply the margins to the target wrapping element, eg:
 The backboneResponsiveCSS3Transitions will insert the new view.$el into the page once it has called the render method.
 If your view emits a render event and you would like the page animation to be delayed until this is emitted then set this an option when instantiating the router.
 2. The router takes care of inserting the views on to the page - do not include this logic in your views!
-3. If the browser does not support 3dPage transitions then they fall back to just plain old $el.html('new html') replacing html.
+3. If the browser does not support CSS3 transitions then they fall back to just plain old $el.html('new html') replacing html.
 4. If you want the js to take care of adding the wrapping divs then the html element must be present on the page when the router is instantiated.
 5. The wrapping element's immediate children should have 100% width for gutter effect to work
 ie this works

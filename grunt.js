@@ -1,9 +1,9 @@
 /*!
- * backbone.responsive3dtransitions v0.1.0
- * git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git
+ * backbone.responsiveCSS3transitions v0.1.0
+ * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
- * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions
- * Documentation: https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions
  *
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license
@@ -41,18 +41,18 @@ module.exports = function(grunt) {
 		},
 		min: {
 			dist: {
-				src: ['<banner>', 'backbone.responsive3dtransitions.js'],
-				dest: 'backbone.responsive3dtransitions.min.js'
+				src: ['<banner>', 'backbone.responsiveCSS3transitions.js'],
+				dest: 'backbone.responsiveCSS3transitions.min.js'
 			}
 		},
 		cssmin: {
 			css: {
-				src: 'backbone.responsive3dtransitions.css',
-				dest: 'backbone.responsive3dtransitions.min.css'
+				src: 'backbone.responsiveCSS3transitions.css',
+				dest: 'backbone.responsiveCSS3transitions.min.css'
 			}
 		},
 		lint: {
-			files: ['backbone.responsive3dtransitions.js', 'server.js', 'grunt.js', 'test.js', 'package.json', 'component.json']
+			files: ['backbone.responsiveCSS3transitions.js', 'server.js', 'grunt.js', 'test.js', 'package.json', 'component.json']
 		},
 		jshint: {
 			options: {

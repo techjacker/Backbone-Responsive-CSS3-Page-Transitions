@@ -1,9 +1,9 @@
 /*!
- * backbone.responsive3dtransitions v0.1.0
- * git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git
+ * backbone.responsiveCSS3transitions v0.1.0
+ * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
- * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions
- * Documentation: https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions
  *
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license
@@ -13,7 +13,7 @@
 
 /*jslint nomen: true, plusplus: false, sloppy: true, white:true*/
 /*jshint nomen: false, curly: true, plusplus: false, expr:true, undef:true, newcap:true, latedef:true, camelcase:true  */
-/*global WebKitCSSMatrix:false, _: false, Backbone: false, backbone: false, $: false, define: false, require: false, console: false, window:false */
+/*global setTimeout: false, document:false, WebKitCSSMatrix:false, _: false, Backbone: false, backbone: false, $: false, define: false, require: false, console: false, window:false */
 (function (root, factory) {
 
 	"use strict";
@@ -23,7 +23,7 @@
 		define(['backbone'], factory);
 	} else {
 		// Browser globals
-		root.backboneResponsive3dTransitions = factory(root.Backbone);
+		root.backboneResponsiveCSS3Transitions = factory(root.Backbone);
 	}
 }(this, function (Backbone) {
 

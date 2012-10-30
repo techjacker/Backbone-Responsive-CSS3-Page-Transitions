@@ -1,10 +1,10 @@
-# Backbone Responsive 3d Transitions
+# Backbone Responsive CSS3 Page Transitions
 
 Adds responsive 3d CSS3 page transitions to backbone.
 
-If the browser does not support 3dPage transitions then they fall back to just plain old $el.html('new html') replacing html.
+If the browser does not support CSS3 3d hardware accelerated transitions then the plugin falls back to plain old $el.html('new html') replacing html.
 
-### [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions)
+### [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 Tested to work with the following reponsive CSS frameworks:
 - twitter bootstrap*
 - foundation*
@@ -13,7 +13,7 @@ Tested to work with the following reponsive CSS frameworks:
 
 \* Make sure you grab the responsive versions of these.
 
-[Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions) of the CSS frameworks @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions)
+[Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) of the CSS frameworks @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 
 Demo code available from the [github repo](https://github.com/techjacker/Backbone-3d-Page-Transitions-CSS-Frameworks-Demos)
 
@@ -21,7 +21,7 @@ Demo code available from the [github repo](https://github.com/techjacker/Backbon
 ## Getting Started
 ### 1. Load the Javascript and CSS
 		<!-- ... -->
-		<link rel="stylesheet" href="scripts/vendor/backbone.responsive3dtransitions.min.css"/>
+		<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
 	</head>
 
 	<body>
@@ -31,7 +31,7 @@ Demo code available from the [github repo](https://github.com/techjacker/Backbon
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 
-		<script src="backbone.responsive3dtransitions.min.js"></script>
+		<script src="backbone.responsiveCSS3transitions.min.js"></script>
 
 #### AMD
 Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in your require.js [shim config](https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#wiki-shim).
@@ -53,13 +53,13 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 	</div>
 
 #### Or 2. Specify the jquery selector of the containing element when initiliasing the router
-	var threeDRouter = backboneResponsive3dTransitions.extend({....});
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
 	var my Router = new threeDRouter({"wrapElement": ".my-container"});
 
 
-### 3. Make your router inherit from backboneResponsive3dTransitions instead of Backbone.Router
+### 3. Make your router inherit from backboneResponsiveCSS3Transitions instead of Backbone.Router
 
-	var threeDRouter = backboneResponsive3dTransitions.extend({...});
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({...});
 	new threeDRouter();
 
 	// your view....
@@ -71,7 +71,7 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 	});
 
 	// your router class loading your view
-	var threeDRouter = backboneResponsive3dTransitions.extend({
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 		routes: {
 			"*default": "loadView",
 		},
@@ -102,7 +102,7 @@ accepts: boolean
 description: make the page transitions wait for the render event to be emitted before triggering the page animation. Useful if you're loading templates with ajax.
 
 	// ... set the renderCallback option to true when initialising your router
-	var threeDRouter = backboneResponsive3dTransitions.extend({....});
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
 	threeDRouter = new threeDRouter({"renderCallback": true});
 
 	// ...in your view class...
@@ -119,14 +119,14 @@ description: make the page transitions wait for the render event to be emitted b
 accepts: boolean
 description: the jquery selector of the html element that contains your content. If you want the js to take care of adding the wrapping divs then set this. **** If you choose this option then the html element must be present on the page when the router is instantiated. If it is inside one of your backbone views that hasn't been loaded onto the page yet on first page load then it will fail miserably ****
 
-	var threeDRouter = backboneResponsive3dTransitions.extend({....});
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
 	new threeDRouter({"wrapElement": ".my-container"});
 
 
 
 ### 4. Use this.triggerTransition(ViewClass, options) in your router's routes' callbacks to trigger the page transition
 
-	var threeDRouter = backboneResponsive3dTransitions.extend({
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 		initialize: function (opts) {
 			// ...
 		},
@@ -183,7 +183,7 @@ The default is no transition ie just replace html.
 - default: moving from #sports/football to #sports/rugby
 
 #### You can manually override this by specifying the direction yourself when calling the this.triggerTransition() method, eg:
-	var threeDRouter = backboneResponsive3dTransitions.extend({
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 		// ...
 		routes: {
 			"*default": "loadView",
@@ -201,7 +201,7 @@ The default is no transition ie just replace html.
 
 ## Example Code
 		<!-- ... -->
-		<link rel="stylesheet" href="scripts/vendor/backbone.responsive3dtransitions.min.css"/>
+		<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
 	</head>
 
 	<body>
@@ -211,10 +211,10 @@ The default is no transition ie just replace html.
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 
-		<script src="backbone.responsive3dtransitions.min.js"></script>
+		<script src="backbone.responsiveCSS3transitions.min.js"></script>
 
 		<script>
-		var threeDRouter = backboneResponsive3dTransitions.extend({
+		var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 			initialize: function (opts) {
 				// ...
 			},
@@ -269,7 +269,7 @@ The default is no transition ie just replace html.
 
 
 ## Centered Designs with outer gutters
-As used in all the [demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions).
+As used in all the [demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions).
 
 Apply the margins to the target wrapping element, eg:
 
@@ -287,7 +287,7 @@ Apply the margins to the target wrapping element, eg:
 
 ## Caveats / Gotchas / Why isn't it working???
 1. Ensure that your Backbone Views have a render method
-The backboneResponsive3dTransitions will insert the new view.$el into the page once it has called the render method.
+The backboneResponsiveCSS3Transitions will insert the new view.$el into the page once it has called the render method.
 If your view emits a render event and you would like the page animation to be delayed until this is emitted then set this an option when instantiating the router.
 2. The router takes care of inserting the views on to the page - do not include this logic in your views!
 3. If the browser does not support 3dPage transitions then they fall back to just plain old $el.html('new html') replacing html.

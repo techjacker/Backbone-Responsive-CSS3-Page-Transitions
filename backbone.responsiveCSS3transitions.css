@@ -1,9 +1,9 @@
 /*!
- * backbone.responsive3dtransitions v0.1.0
- * git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git
+ * backbone.responsiveCSS3transitions v0.1.0
+ * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
- * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions
- * Documentation: https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions
+ * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
+ * Documentation: https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions
  *
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license

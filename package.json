@@ -1,22 +1,22 @@
 {
-  "name": "backbone.responsive3dtransitions",
-  "title": "Backbone Responsive 3d Page Transitions",
-  "description": "Adds responsive 3d CSS3 page transitions to backbone.",
+  "name": "backbone.responsiveCSS3transitions",
+  "title": "Backbone Responsive CSS3 Page Transitions",
+  "description": "Adds responsive CSS3 page transitions to backbone.",
   "version": "0.1.0",
-  "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-3d-page-transitions",
+  "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions",
   "author": "Andrew Griffiths",
   "repository": {
     "type": "git",
-    "url": "git://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions.git"
+    "url": "git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git"
   },
-  "github": "https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions",
+  "github": "https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions",
   "bugs": {
-    "url": "https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions/issues"
+    "url": "https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/techjacker/Backbone-Responsive-3d-Page-Transitions/blob/master/LICENSE-MIT"
+      "url": "https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {

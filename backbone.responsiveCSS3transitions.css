@@ -11,62 +11,50 @@
  * Date: 2012-10-26
  */
 
-/*--------------------------------------
-Base Styles
----------------------------------------*/
+/*
+this.$outmostContainer = <div class="threeDTrans-outmost-page-container threeDTrans"> POSITION: ABSOLUTE;
+		this.$container	= <div class="threeDTrans-page-container threeDTrans-page-container-backwards threeDTrans-animate-transform"> POSITION: RELATIVE; FLOAT: RIGHT;
+			this.prevView this.newView <div class="threeDTrans-page"> FLOAT: LEFT; FLOAT: RIGHT; (in js) */
 .threeDTrans {
-	position:absolute;
-}
-
-.threeDTrans a {
-	cursor:default;
-}
-
-.threeDTrans .threeDTrans-outer-page-container {
-	text-align:left;
-}
-
-.threeDTrans .threeDTrans-outer-page-container, .threeDTrans .threeDTrans-inner-page-container, .threeDTrans .threeDTrans-page-container {
 	position: relative;
-}
-
-.threeDTrans .threeDTrans-outer-page-container, .threeDTrans .threeDTrans-inner-page-container {
 	overflow: hidden;
 }
 
-.threeDTrans .threeDTrans-page-container, .threeDTrans .threeDTrans-page {
-	width: 100%;
-	height: 100%;
-	margin:0;
+.threeDTrans-outmost-page-container, .threeDTrans-page-container, .threeDTrans-page {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+}
+
+.threeDTrans .threeDTrans-page-container {
+	position: relative;
+	overflow: visible;
+	width: 200%;
+}
+
+	.threeDTrans .threeDTrans-page-container-backwards .threeDTrans-page:nth-child(1) {
+		left: -50%;
+	}
+
+	.threeDTrans .threeDTrans-page-container-forwards .threeDTrans-page:nth-child(2) {
+		left: 50%;
+	}
+
+.threeDTrans .threeDTrans-page {
+	position: absolute;
+	margin: 0;
+	left:0;
+	top:0;
 }
 
 .threeDTrans-page {
-	padding:0 !important;
+	padding: 0 !important;
+	z-index: 999999;
+	/*background-color: #bada55;*/
 }
-
-/*--------------------------------------
-Animation Styles
----------------------------------------*/
-.threeDTrans-outer-page-backwards {
-	left: -100%;
-}
-
-.threeDTrans-inner-page-container {
-	width: 200%;
-	overflow: hidden;
-}
-
-.threeDTrans-inner-page-container .threeDTrans-page-container {
-	width: 50%;
-}
-
-.threeDTrans-inner-page-container .threeDTrans-page {
-	position: absolute;
-}
-
-.threeDTrans-page:nth-child(2) {
-	left:100%;
-}
+	.threeDTrans-page:nth-child(2) {
+		/*background-color: yellow;*/
+	}
 
 /*--------------------------------------
 Animate
@@ -79,23 +67,36 @@ Animate
 	transition: transform 0.5s ease-in-out;
 }
 
-.threeDTrans-animate-forwards, .threeDTrans-animate-backwards {
-	-webkit-backface-visibility: hidden;
-	-webkit-perspective: 1000;
-}
-
 .threeDTrans-animate-forwards {
-	-webkit-transform: translate3d(-100%,0,0);
-	-moz-transform: translate3d(-100%,0,0);
-	-o-transform: translate3d(-100%,0,0);
-	-ms-transform: translate3d(-100%,0,0);
-	transform: translate3d(-100%,0,0);
+	-webkit-transform: translate3d(-50%,0,0);
+	-moz-transform: translate3d(-50%,0,0);
+	-o-transform: translate3d(-50%,0,0);
+	-ms-transform: translate3d(-50%,0,0);
+	transform: translate3d(-50%,0,0);
 }
 
 .threeDTrans-animate-backwards {
-	-webkit-transform: translate3d(100%,0,0);
-	-moz-transform: translate3d(100%,0,0);
-	-o-transform: translate3d(100%,0,0);
-	-ms-transform: translate3d(100%,0,0);
-	transform: translate3d(100%,0,0);
+	-webkit-transform: translate3d(50%,0,0);
+	-moz-transform: translate3d(50%,0,0);
+	-o-transform: translate3d(50%,0,0);
+	-ms-transform: translate3d(50%,0,0);
+	transform: translate3d(50%,0,0);
+}
+
+/*--------------------------------------
+Mixins
+---------------------------------------*/
+div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.threeDTrans a {
+	cursor:default;
+}
+
+.threeDTrans .threeDTrans-outer-page-container {
+	text-align:left;
 }

@@ -5,6 +5,13 @@ Adds responsive CSS3 page transitions to backbone.
 If the browser does not support CSS3 hardware accelerated transitions then the plugin falls back to plain old $el.html('new html') replacing html.
 
 ### [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
+
+Works on Chrome 12+, Safari 4+, Firefox 14+, ie 10+, Android 2.1+
+
+Lightweight: 3k (minified + gzipped)
+
+Require.js AMD compatible
+
 Tested to work with the following reponsive CSS frameworks:
 - twitter bootstrap*
 - foundation*
@@ -40,15 +47,13 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 
 #### Either: 1. wrap your container div with the wrapping divs needed manually
 	<div class="threeDTrans-outmost-page-container">
-		<div class="threeDTrans-outer-page-container">
-			<div id="threeDTrans-inner-page-container">
-				<div class="threeDTrans-page-container">
+		<div class="threeDTrans-page-container">
 
-					<!-- your container -->
-					<div class="my-container"></div>
-
-				</div>
+			<!-- your container -->
+			<div id="my-container" class="threeDTrans-page"">
+				<p>my amazing website...</p>
 			</div>
+
 		</div>
 	</div>
 
@@ -316,3 +321,4 @@ Run the tests:
 
 ## Release History
 0.1.0
+0.2.0 - Added Android Support

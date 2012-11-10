@@ -44,7 +44,7 @@ window.TestRunnerQunit = (function() {
 
 		test("this.domSetUp() >> Js should wrap the target element with the necessary classes if included as an opion", function () {
 
-			expect(4);
+			expect(3);
 
 			var	$parent, $grandParent, $greatGrandParent,
 				options = {"wrapElement": ".threeDTrans-wrap-me"},
@@ -56,10 +56,9 @@ window.TestRunnerQunit = (function() {
 			// add container divs if told to by wrapElement option
 			$parent             = this.$target.parent();
 			$grandParent        = $parent.parent();
-			$greatGrandParent   = $grandParent.parent();
+
 			ok($parent.hasClass('threeDTrans-page-container'), 'wrapped parent element should have class: "threeDTrans-page-container"');
-			strictEqual($grandParent.get(0).id, 'threeDTrans-inner-page-container', 'wrapped grand-parent element should id: "threeDTrans-inner-page-container"');
-			ok($greatGrandParent.hasClass('threeDTrans-outer-page-container'), 'wrapped great-grand-parent element should have class: "threeDTrans-outer-page-container"');
+			ok($grandParent.hasClass('threeDTrans-outmost-page-container'), 'wrapped great-grand-parent element should have class: "threeDTrans-outmost-page-container"');
 		});
 
 		// set variable to check whether all container divs have been added
@@ -128,9 +127,7 @@ window.TestRunnerQunit = (function() {
 
 			var	wrapOptions = {"wrapElement": ".threeDTrans-wrap-me"},
 				router		= new ThreeDRouter(),
-				csstransforms3d = function () {
-					return ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix());
-				}();
+				csstransforms3d = router.csstransforms3d();
 			strictEqual(router.calculateDirection(), 'default', 'direction on first page load should = "default"');
 
 			// safety checks >> should default to "default"

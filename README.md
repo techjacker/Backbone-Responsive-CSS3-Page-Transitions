@@ -127,6 +127,14 @@ description: the jquery selector of the html element that contains your content.
 	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
 	new threeDRouter({"wrapElement": ".my-container"});
 
+@param {options.fastClick}
+accepts: fastClick function/constructor
+description: assign the function you want to call on links in order to remove click delay on touch devices, I recommend [fastclick.js](https://github.com/ftlabs/fastclick) Eg:
+	// include lib in index.html
+	<script src="scripts/vendor/fastclick.js"></script>
+
+	// in your js
+	new threeDRouter({"fastClick": window.FastClick});
 
 
 ### 4. Use this.triggerTransition(ViewClass, options) in your router's routes' callbacks to trigger the page transition
@@ -322,3 +330,4 @@ Run the tests:
 ## Release History
 0.1.0
 0.2.0 - Added Android Support
+0.2.1 - Added FastClick functionality + fixed ie10 bug

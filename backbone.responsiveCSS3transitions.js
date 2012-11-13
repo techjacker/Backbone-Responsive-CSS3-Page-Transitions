@@ -1,5 +1,5 @@
 /*!
- * backbone.responsiveCSS3transitions v0.1.0
+ * backbone.responsiveCSS3transitions v0.1.2
  * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
  * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
@@ -36,6 +36,7 @@
 			if (options) {
 				this.wrapElement = options.wrapElement;
 				this.renderCallback = options.renderCallback;
+				this.fastClick = options.fastClick;
 			}
 			this.callBackCounter = 0;
 			this.debugCounter = 0;
@@ -170,7 +171,7 @@
 				}
 
 				// debugging
-				// this.newView.$('h1').html(++this.debugCounter);
+				this.newView.$('h1').html(++this.debugCounter);
 
 				// run the animation and attach the cleanup callback to the end of the animation
 				if (_($.browser).has('mozilla') && $.browser.mozilla === true) {
@@ -268,6 +269,10 @@
 				}, 50);
 			},
 			enableLinks: function (view) {
+				// remove click delay if requested
+				if (this.fastClick !== undefined && _.isFunction(this.fastClick)) {
+					new this.fastClick(view.el);
+				}
 				setTimeout(function () {
 					view.$('a').off('threeDTrans.click');
 				}, 50);
@@ -279,7 +284,7 @@
 					transforms = {
 						'WebkitTransform': '-webkit-transform',
 						'OTransform': '-o-transform',
-						'MSTransform': '-ms-transform',
+						'msTransform': '-ms-transform',
 						'MozTransform': '-moz-transform',
 						'Transform': 'transform'
 					};

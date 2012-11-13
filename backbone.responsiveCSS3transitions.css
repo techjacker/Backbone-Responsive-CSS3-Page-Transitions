@@ -1,5 +1,5 @@
 /*!
- * backbone.responsiveCSS3transitions v0.1.0
+ * backbone.responsiveCSS3transitions v0.2.1
  * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
  * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
@@ -86,12 +86,12 @@ Animate
 /*--------------------------------------
 Mixins
 ---------------------------------------*/
-div {
+/*div {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	box-sizing: border-box;
-}
+}*/
 
 .threeDTrans a {
 	cursor:default;

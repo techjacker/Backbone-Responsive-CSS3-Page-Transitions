@@ -1,5 +1,5 @@
 /*!
- * backbone.responsiveCSS3transitions v0.2.1
+ * backbone.responsiveCSS3transitions v0.3.1
  * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
  * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
@@ -8,6 +8,6 @@
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license
  *
- * Date: 2012-10-26
+ * Date: 2012-11-16
  */
 .threeDTrans{position:relative;overflow:hidden}.threeDTrans-outmost-page-container,.threeDTrans-page-container,.threeDTrans-page{-webkit-backface-visibility:hidden;-ms-backface-visibility:hidden}.threeDTrans .threeDTrans-page-container{position:absolute;overflow:visible;width:200%;height:100%}.threeDTrans .threeDTrans-page-container-backwards .threeDTrans-page:nth-child(1){left:-50%!important}.threeDTrans .threeDTrans-page-container-forwards .threeDTrans-page:nth-child(2){left:50%!important;overflow:hidden!important}.threeDTrans .threeDTrans-page{position:absolute;margin:0;left:0;top:0}.threeDTrans-page{padding:0!important}.threeDTrans-animate-transform{-webkit-transition:-webkit-transform 0.5s ease-in-out;-moz-transition:-moz-transform 0.5s ease-in-out;-o-transition:-o-transform 0.5s ease-in-out;-ms-transition:-ms-transform 0.5s ease-in-out;transition:transform 0.5s ease-in-out;overflow:hidden}.threeDTrans-animate-forwards{-webkit-transform:translate3d(-50%,0,0);-moz-transform:translate3d(-50%,0,0);-o-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0)}.threeDTrans-animate-backwards{-webkit-transform:translate3d(50%,0,0);-moz-transform:translate3d(50%,0,0);-o-transform:translate3d(50%,0,0);-ms-transform:translate3d(50%,0,0);transform:translate3d(50%,0,0)}.threeDTrans a{cursor:default}.threeDTrans .threeDTrans-outer-page-container{text-align:left}

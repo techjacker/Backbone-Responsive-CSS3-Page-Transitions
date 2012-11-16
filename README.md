@@ -24,12 +24,18 @@ Tested to work with the following reponsive CSS frameworks:
 
 Demo code available from the [github repo](https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos)
 
+
+
+
 ## Plugins
 ### iScroll4 Plugin
 * [iScroll](http://cubiq.org/iscroll-4) plugin available the [github repo](https://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions-iScroll-Plugin)
 * plugin compatible with v0.3+
 * useful for ensuring that page transitions always load the new page scrolled to the top
 * smoother page transitions that avoid scroll "jumps"
+
+
+
 
 
 ## Getting Started
@@ -339,3 +345,4 @@ Run the tests:
 0.2.0 - Added Android Support
 0.2.1 - Added FastClick functionality + fixed ie10 bug
 0.3.0 - Added iScroll plugin compatibility (released as separate plugin)
+0.3.1 - Render callback bug fix

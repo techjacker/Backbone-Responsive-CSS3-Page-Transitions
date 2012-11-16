@@ -1,5 +1,5 @@
 /*!
- * backbone.responsiveCSS3transitions v0.2.1
+ * backbone.responsiveCSS3transitions v0.3.1
  * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
  * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
@@ -8,7 +8,7 @@
  * Copyright 2012, Andrew Griffiths
  * Released under a MIT license
  *
- * Date: 2012-10-26
+ * Date: 2012-11-16
  */
 
 /*jslint nomen: true, plusplus: false, sloppy: true, white:true*/
@@ -21,6 +21,8 @@
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define(['backbone'], factory);
+		// if using fastclick then replace the line above with this
+		// define(['backbone', 'fastclick'], factory);
 	} else {
 		// Browser globals
 		root.backboneResponsiveCSS3Transitions = factory(root.Backbone);
@@ -378,7 +380,7 @@
 				}, this);
 
 				// trigger page transition timing: wait for the view to emit the render event or call immediately
-				(this.renderCallback && this.newView.on('render', this.newView.renderCb)) || renderCb();
+				(this.renderCallback && this.newView.on('render', this.newView.renderCb)) || this.newView.renderCb();
 			}
 
 		});

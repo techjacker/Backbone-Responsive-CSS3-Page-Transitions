@@ -10,7 +10,7 @@
  *
  * Date: 2012-10-26
  */
-
+/*
 /*
 this.$outmostContainer = <div class="threeDTrans-outmost-page-container threeDTrans"> POSITION: ABSOLUTE;
 		this.$container	= <div class="threeDTrans-page-container threeDTrans-page-container-backwards threeDTrans-animate-transform"> POSITION: RELATIVE; FLOAT: RIGHT;
@@ -22,22 +22,24 @@ this.$outmostContainer = <div class="threeDTrans-outmost-page-container threeDTr
 
 .threeDTrans-outmost-page-container, .threeDTrans-page-container, .threeDTrans-page {
 	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
+	/*-moz-backface-visibility: hidden;*/
 	-ms-backface-visibility: hidden;
 }
 
 .threeDTrans .threeDTrans-page-container {
-	position: relative;
+	position: absolute;
 	overflow: visible;
 	width: 200%;
+	height: 100%;
 }
 
 	.threeDTrans .threeDTrans-page-container-backwards .threeDTrans-page:nth-child(1) {
-		left: -50%;
+		left: -50% !important;
 	}
 
 	.threeDTrans .threeDTrans-page-container-forwards .threeDTrans-page:nth-child(2) {
-		left: 50%;
+		left: 50% !important;
+		overflow:hidden !important;
 	}
 
 .threeDTrans .threeDTrans-page {
@@ -49,12 +51,7 @@ this.$outmostContainer = <div class="threeDTrans-outmost-page-container threeDTr
 
 .threeDTrans-page {
 	padding: 0 !important;
-	z-index: 999999;
-	/*background-color: #bada55;*/
 }
-	.threeDTrans-page:nth-child(2) {
-		/*background-color: yellow;*/
-	}
 
 /*--------------------------------------
 Animate
@@ -65,6 +62,7 @@ Animate
 	-o-transition: -o-transform 0.5s ease-in-out;
 	-ms-transition: -ms-transform 0.5s ease-in-out;
 	transition: transform 0.5s ease-in-out;
+	overflow:hidden;
 }
 
 .threeDTrans-animate-forwards {
@@ -86,13 +84,6 @@ Animate
 /*--------------------------------------
 Mixins
 ---------------------------------------*/
-/*div {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
-}*/
-
 .threeDTrans a {
 	cursor:default;
 }

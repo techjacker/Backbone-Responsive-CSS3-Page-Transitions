@@ -1,5 +1,5 @@
 /*!
- * backbone.responsiveCSS3transitions v0.1.2
+ * backbone.responsiveCSS3transitions v0.2.1
  * git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git
  *
  * Demos: http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions
@@ -31,7 +31,7 @@
 
 		var threeDRouter = function (options) {
 
-			_(this).bindAll('pageTransitionAnimation', 'calculateDirection', 'triggerTransition', 'resetCssContainers', 'calculateCssOutmostDiv', 'clearUpAfterTransition');
+			_(this).bindAll('pageTransitionAnimation', 'insertNewPageDefault', 'calculateDirection', 'triggerTransition', 'resetCssContainers', 'setPagePreAnimationStyles', 'clearUpAfterTransition', 'setOutmostContainerPreAnimationStyles');
 
 			if (options) {
 				this.wrapElement = options.wrapElement;
@@ -48,7 +48,7 @@
 
 		_.extend(threeDRouter.prototype, Backbone.Router.prototype, {
 
-			calculateCssOutmostDiv: function ($page, windowWidth, percentage) {
+			setOutmostContainerPreAnimationStyles: function ($page, windowWidth) {
 
 				(($page instanceof jQuery) || ($page = $(this.wrapElement)));
 
@@ -60,37 +60,29 @@
 
 				// calculate width and margins to transfer to outermost container
 				var pageWidth   = parseInt($page.css('width'), 10),
-				pageMarginRight = parseInt($page.css('margin-right'), 10),
-				pageMarginLeft  = parseInt($page.css('margin-left'), 10),
 				pageMinWidth    = parseInt($page.css('min-width'), 10),
-				pageMaxWidth    = parseInt($page.css('max-width'), 10);
+				pageMaxWidth    = parseInt($page.css('max-width'), 10),
+				pageMarginRight = parseInt($page.css('margin-right'), 10),
+				pageMarginLeft  = parseInt($page.css('margin-left'), 10);
 
 				// for browsers that return the value set in the stylesheet (not the acutal one)
 				if ((!pageMarginRight && !pageMarginLeft) && (windowWidth !== pageWidth)) {
 					pageMarginRight = pageMarginLeft = Math.abs((windowWidth - pageWidth) / 2);
 				}
 
-				if (percentage === true) {
-					this.cssOutmostDiv = {
-						"height": $(window).height(),
-						"width": (pageWidth / windowWidth * 100) + "%",
-						"margin-right": (pageMarginRight / windowWidth * 100) + "%",
-						"margin-left": (pageMarginLeft  / windowWidth * 100) + "%",
-						"min-width": pageMinWidth,
-						"max-width": pageMaxWidth
-					};
-				} else {
-					this.cssOutmostDiv = {
-						"height": $(window).height(),
-						"width": pageWidth,
-						"margin-right": pageMarginRight,
-						"margin-left": pageMarginLeft,
-						"min-width": pageMinWidth,
-						"max-width": pageMaxWidth
-					};
-				}
+				this.cssOutmostDiv = {
+					"height": $(window).height(),
+					"width": pageWidth,
+					"margin-right": pageMarginRight,
+					"margin-left": pageMarginLeft,
+					"min-width": pageMinWidth,
+					"max-width": pageMaxWidth
+				};
 
-				this.trigger('threeDTrans.calculatedCssOutmostDiv');
+				this.$outmostContainer.css(this.cssOutmostDiv);
+
+				this.trigger('threeDTrans.setOutmostContainerPreAnimationStyles');
+
 				return this.cssOutmostDiv;
 			},
 
@@ -141,6 +133,25 @@
 				return url.replace(/\/+$/, "");
 			},
 
+			setPagePreAnimationStyles: function () {
+
+				var cssPages = {
+					"width" : this.cssOutmostDiv.width,
+					"height" : this.cssOutmostDiv.height
+				};
+				this.newView.$el.css(cssPages);
+				this.initialLoad || this.prevView.$el.css(cssPages);
+			},
+
+			insertNewPageBeforeAnimation: function (direction) {
+				if (direction === "backwards") {
+					this.$container.addClass('threeDTrans-page-container-' + direction);
+					this.$container.prepend(this.newView.el);
+				} else {
+					this.$container.addClass('threeDTrans-page-container-' + direction);
+					this.$container.append(this.newView.el);
+				}
+			},
 			pageTransitionAnimation: function (direction, $container) {
 
 				var cssPages,
@@ -150,25 +161,14 @@
 				this.disableLinks(this.newView);
 
 				// fix container widths in pixels
-				this.$outmostContainer.css(this.calculateCssOutmostDiv());
-				cssPages = {
-					"width" : this.cssOutmostDiv.width,
-					"height" : this.cssOutmostDiv.height
-				};
-				this.newView.$el.css(cssPages);
-				this.initialLoad || this.prevView.$el.css(cssPages);
+				this.setOutmostContainerPreAnimationStyles();
+				this.setPagePreAnimationStyles();
 
 				// add absolute positioning styles
 				this.$outmostContainer.addClass('threeDTrans');
 
 				// insert new page
-				if (direction === "backwards") {
-					this.$container.prepend(this.newView.el);
-					$container.addClass('threeDTrans-page-container-' + direction);
-				} else {
-					this.$container.append(this.newView.el);
-					$container.addClass('threeDTrans-page-container-' + direction);
-				}
+				this.insertNewPageBeforeAnimation(direction);
 
 				// debugging
 				this.newView.$('h1').html(++this.debugCounter);
@@ -209,10 +209,10 @@
 				$container.off(".threeDTrans");
 				$container.removeClass('threeDTrans-animate-transform');
 
-				$container.removeClass('threeDTrans-page-container-backwards threeDTrans-page-container-forwards');
 				$container.removeClass('threeDTrans-animate-forwards threeDTrans-animate-backwards');
 
 				this.disposeView(this.prevView);
+				$container.removeClass('threeDTrans-page-container-backwards threeDTrans-page-container-forwards');
 
 				this.$outmostContainer.removeClass('threeDTrans');
 				this.resetCssContainers();
@@ -224,19 +224,43 @@
 				this.trigger('threeDTrans.pageTransitionComplete');
 			},
 
+			disableLinks: function (view) {
+				setTimeout(function () {
+					view.$('a').on('threeDTrans.click', function (event) {
+						event && event.preventDefault() && event.stopPropagation();
+					});
+				}, 50);
+			},
+			enableLinks: function (view) {
+				// remove click delay if requested
+				if (this.fastClick !== undefined && _.isFunction(this.fastClick)) {
+					new this.fastClick(view.el);
+				}
 
+				setTimeout(function () {
+					view.$('a').off('threeDTrans.click');
+				}, 50);
+			},
+
+			unbindViewRenderCallback: function (View) {
+				View.renderCb && View.off('render', View.renderCb);
+			},
 			disposeView: function (View) {
 
 				if (!View) {
 					return false;
 				} else if (_.isFunction(View.dispose)) {
-					View.renderCb && View.off('render', View.renderCb);
+					this.unbindViewRenderCallback(View);
 					View.dispose();
 				} else {
-					View.renderCb && View.off('render', View.renderCb);
+					this.unbindViewRenderCallback(View);
 					View.unbind();
 					View.remove();
 				}
+			},
+
+			insertNewPageDefault: function () {
+				this.$container.html(this.newView.el);
 			},
 
 			insertNewPage: {
@@ -251,36 +275,22 @@
 				// no transition needed > just straight out swap pages
 				'default': function () {
 
-					var self = this;
-
-					self.$container.html(self.newView.el);
-					self.disposeView(self.prevView);
+					this.insertNewPageDefault();
+					this.disposeView(this.prevView);
 
 					this.pageTransInProgress = false;
 					this.callBackCounter = 0;
 					this.trigger('threeDTrans.pageTransitionComplete');
+
+
 				}
 			},
-			disableLinks: function (view) {
-				setTimeout(function () {
-					view.$('a').on('threeDTrans.click', function (event) {
-						event && event.preventDefault() && event.stopPropagation();
-					});
-				}, 50);
-			},
-			enableLinks: function (view) {
-				// remove click delay if requested
-				if (this.fastClick !== undefined && _.isFunction(this.fastClick)) {
-					new this.fastClick(view.el);
-				}
-				setTimeout(function () {
-					view.$('a').off('threeDTrans.click');
-				}, 50);
-			},
+
 			csstransforms3d: function () {
 				// return ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix());
 				var el = document.createElement('p'),
 					has3d,
+					t,
 					transforms = {
 						'WebkitTransform': '-webkit-transform',
 						'OTransform': '-o-transform',
@@ -292,7 +302,7 @@
 				// Add it to the body to get the computed style.
 				document.body.insertBefore(el, null);
 
-				for (var t in transforms) {
+				for (t in transforms) {
 					if (el.style[t] !== undefined) {
 						el.style[t] = "translate3d(1px,1px,1px)";
 						has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
@@ -355,6 +365,7 @@
 				// initialise new view and its subviews && save ref to hash
 				this.newView = (new ViewClass(viewInitOpts));
 				this.newView.hash || (this.newView.hash = this.removeTrailingSlashes(window.location.hash));
+
 
 				// 0. render the new view 1. insert new page, 2. add zero margins
 				this.newView.render(renderParams);

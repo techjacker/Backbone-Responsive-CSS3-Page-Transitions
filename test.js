@@ -77,9 +77,9 @@ window.TestRunnerQunit = (function() {
 
 
 		// check the outer margins are being calculated correctly
-		test("this.calculateCssOutmostDiv() >> calculate outer margins for outmost div", function () {
+		test("this.setOutmostContainerPreAnimationStyles() >> set CSS needed for animation on outmost div", function () {
 
-			expect(8);
+			expect(3);
 
 			var	router = new ThreeDRouter(),
 				windowWidth = 1000,
@@ -97,27 +97,15 @@ window.TestRunnerQunit = (function() {
 				return dimensions[attr];
 			};
 
-			router.on('threeDTrans.calculatedCssOutmostDiv', function () {
+			router.on('threeDTrans.setOutmostContainerPreAnimationStyles', function () {
 				called++;
 			});
 
-			css = router.calculateCssOutmostDiv($page, windowWidth);
+			css = router.setOutmostContainerPreAnimationStyles($page, windowWidth);
 			strictEqual(css["margin-right"], 100, 'right margin should still be 100');
 			strictEqual(css["margin-left"], 100, 'left margin should still be 100');
 
-			css = router.calculateCssOutmostDiv($page, windowWidth, true);
-			strictEqual(css["margin-right"], "10%", 'right margin should be 10%');
-			strictEqual(css["margin-left"], "10%", 'left margin should be 10%');
-			strictEqual(css.width, "80%", 'width should be 80%');
-
-			// values should be the same for browsers which return stylesheet not actual values
-			dimensions["margin-right"] = dimensions["margin-left"] = 0;
-			css = router.calculateCssOutmostDiv($page, windowWidth, true);
-			strictEqual(css["margin-right"], "10%", 'right margin should still be 10%');
-			strictEqual(css["margin-left"], "10%", 'left margin should still be 10%');
-
-
-			strictEqual(called, 3, 'threeDTrans.calculatedCssOutmostDiv event should have been emitted 3 times');
+			strictEqual(called, 1, 'threeDTrans.calculatedCssOutmostDiv event should have been emitted 3 times');
 		});
 
 

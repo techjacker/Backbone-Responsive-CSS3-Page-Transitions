@@ -20,7 +20,14 @@ Tested to work with the following reponsive CSS frameworks:
 
 - Demo code available from the [github repo](https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos)
 
+## Install via Package Manager
+Grab from [Jam.js](http://jamjs.org/packages/#/details/backbone.responsiveCSS3transitions):
 
+	me@badass:~$ jam install backbone.responsiveCSS3transitions
+
+or [Bower](https://npmjs.org/package/bower):
+
+	me@badass:~$ bower install backbone.responsiveCSS3transitions
 
 
 ## Plugins

@@ -1,6 +1,6 @@
 {
   "name": "backbone.responsiveCSS3transitions",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "main": ["backbone.responsiveCSS3transitions.js", "backbone.responsiveCSS3transitions.css", "backbone.responsiveCSS3transitions.min.js", "backbone.responsiveCSS3transitions.min.css"],
   "dependencies": {
     "backbone": "*"

@@ -1,10 +1,17 @@
 {
   "name": "backbone.responsiveCSS3transitions",
   "title": "Backbone Responsive CSS3 Page Transitions",
-  "description": "Adds responsive CSS3 page transitions to backbone.",
-  "version": "0.3.0",
+  "description": "Adds responsive hardware accelerated CSS3 page transitions to backbone.",
+  "version": "0.3.1",
   "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions",
   "author": "Andrew Griffiths",
+  "maintainers": [
+    {
+      "name": "Andrew Griffiths",
+      "email": "mail@andrewgriffithsonline.com"
+      "web": "http://projects.andrewgriffithsonline.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/techjacker/Backbone-Responsive-CSS3-Page-Transitions.git"

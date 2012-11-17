@@ -21,7 +21,7 @@
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define(['backbone'], factory);
-		// if using fastclick then replace the line above with this
+		// if using fastclick then replace the line above with this:
 		// define(['backbone', 'fastclick'], factory);
 	} else {
 		// Browser globals

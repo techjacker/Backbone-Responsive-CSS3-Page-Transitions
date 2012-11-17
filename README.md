@@ -1,28 +1,24 @@
 # Backbone Responsive CSS3 Page Transitions
 
-Adds responsive CSS3 page transitions to backbone.
+Adds responsive* CSS3 page transitions to backbone.
+- Works on Chrome 12+, Safari 4+, Firefox 14+, ie 10+, Android 2.1+
+- Lightweight: 3k (minified + gzipped)
+- Require.js AMD compatible
+- Falls back to replacing page content if the browser does not support CSS3 translate3d transformations (eg opera)
 
-If the browser does not support CSS3 hardware accelerated transitions then the plugin falls back to plain old $el.html('new html') replacing html.
+***** *This plugin does not magically make fixed width layouts into responsive ones. Coding a responsive CSS layout is a prerequisite to using the plugin *****
 
-### [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
-
-Works on Chrome 12+, Safari 4+, Firefox 14+, ie 10+, Android 2.1+
-
-Lightweight: 3k (minified + gzipped)
-
-Require.js AMD compatible
+## [Responsive CSS Framework Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 
 Tested to work with the following reponsive CSS frameworks:
-- twitter bootstrap*
-- foundation*
-- skeleton
-- simplegrid
+1. twitter bootstrap responsive
+2. foundation responsive
+3. skeleton
+4. simplegrid
 
-\* Make sure you grab the responsive versions of these.
+- [Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) of the CSS frameworks @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
 
-[Demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions) of the CSS frameworks @ [the project homepage](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions)
-
-Demo code available from the [github repo](https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos)
+- Demo code available from the [github repo](https://github.com/techjacker/Backbone-CSS3-Page-Transitions-CSS-Frameworks-Demos)
 
 
 
@@ -54,7 +50,18 @@ Demo code available from the [github repo](https://github.com/techjacker/Backbon
 		<script src="backbone.responsiveCSS3transitions.min.js"></script>
 
 #### AMD
+
+##### Backbone Dependency
 Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in your require.js [shim config](https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#wiki-shim).
+
+##### Fastclick Dependency
+If you want to use the fastclick functionality with an AMD set up then you should set up your shim config as with backbone and then edit the AMD definition in backbone.responsiveCSS3transitions.js
+
+		//...... top of backbone.responsiveCSS3transitions.js file
+		define(['backbone'], factory);
+		// if using fastclick then replace the line above with this:
+		// define(['backbone', 'fastclick'], factory);
+
 
 ### 2. HTML Set Up: Wrapping Divs
 
@@ -63,7 +70,7 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 		<div class="threeDTrans-page-container">
 
 			<!-- your container -->
-			<div id="my-container" class="threeDTrans-page"">
+			<div class="my-container threeDTrans-page"">
 				<p>my amazing website...</p>
 			</div>
 
@@ -112,42 +119,43 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 
 #### Router Instantiation Options
 
-@param {options}
-accepts: object
+##### @param {options}
+* accepts: object
 
-@param {options.renderCallback}
-accepts: boolean
-description: make the page transitions wait for the render event to be emitted before triggering the page animation. Useful if you're loading templates with ajax.
+##### @param {options.renderCallback}
+* accepts: boolean
+* description: make the page transitions wait for the render event to be emitted before triggering the page animation. Useful if you're loading templates with ajax.
 
-	// ... set the renderCallback option to true when initialising your router
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
-	threeDRouter = new threeDRouter({"renderCallback": true});
+		// ... set the renderCallback option to true when initialising your router
+		var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
+		threeDRouter = new threeDRouter({"renderCallback": true});
 
-	// ...in your view class...
-	var myBackboneView = Backbone.View.extend({
-		// ...
-		render: function () {
+		// ...in your view class...
+		var myBackboneView = Backbone.View.extend({
 			// ...
-			this.trigger('render');
-		}
-	});
+			render: function () {
+				// ...
+				this.trigger('render');
+			}
+		});
 
 
-@param {options.wrapElement}
-accepts: boolean
-description: the jquery selector of the html element that contains your content. If you want the js to take care of adding the wrapping divs then set this. **** If you choose this option then the html element must be present on the page when the router is instantiated. If it is inside one of your backbone views that hasn't been loaded onto the page yet on first page load then it will fail miserably ****
+##### @param {options.wrapElement}
+* accepts: boolean
+* description: the jquery selector of the html element that contains your content. If you want the js to take care of adding the wrapping divs then set this. **** If you choose this option then the html element must be present on the page when the router is instantiated. If it is inside one of your backbone views that hasn't been loaded onto the page yet on first page load then it will fail miserably ****
 
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
-	new threeDRouter({"wrapElement": ".my-container"});
+		var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
+		new threeDRouter({"wrapElement": ".my-container"});
 
-@param {options.fastClick}
-accepts: fastClick function/constructor
-description: assign the function you want to call on links in order to remove click delay on touch devices, I recommend [fastclick.js](https://github.com/ftlabs/fastclick) Eg:
-	// include lib in index.html
-	<script src="scripts/vendor/fastclick.js"></script>
+##### @param {options.fastClick}
+* accepts: fastClick function/constructor
+* description: assign the function you want to call on links in order to remove click delay on touch devices, I recommend [fastclick.js](https://github.com/ftlabs/fastclick) Eg:
 
-	// in your js
-	new threeDRouter({"fastClick": window.FastClick});
+		// include lib in index.html
+		<script src="scripts/vendor/fastclick.js"></script>
+
+		// in your js
+		new threeDRouter({"fastClick": window.FastClick});
 
 
 ### 4. Use this.triggerTransition(ViewClass, options) in your router's routes' callbacks to trigger the page transition
@@ -174,24 +182,24 @@ description: assign the function you want to call on links in order to remove cl
 ##### ViewClass
 The backbone view class of the new page to be inserted.
 It's render method will be called before inserting it into the new page.
-@param {viewClass}
-accepts: Backbone View Class
+###### @param {viewClass}
+* accepts: Backbone View Class
 
 #### options object
-@param {options}
-accepts: object
+###### @param {options}
+* accepts: object
 
-@param {options.viewInitOps}
-accepts: object
-description: passed as the options object when instantiating the new view
+###### @param {options.viewInitOps}
+* accepts: object
+* description: passed as the options object when instantiating the new view
 
-@param {options.renderParams}
-accepts: any type
-description: passed as params when calling the new view render's method
+###### @param {options.renderParams}
+* accepts: any type
+* description: passed as params when calling the new view render's method
 
-@param {options.direction}
-accepts: string ("backwards", "forwards", "default")
-description: manually override direction calculation by supplying your own value
+###### @param {options.direction}
+* accepts: string ("backwards", "forwards", "default")
+* description: manually override direction calculation by supplying your own value
 default = just swaps the new page html without applying a sliding transition
 
 
@@ -304,10 +312,8 @@ Apply the margins to the target wrapping element, eg:
 
 	// in your stylesheet...
 	.my-container {
-		width: 90%;
-		max-width: 1000px !important;
-		margin:0 auto;
-		padding:0 5%;
+		width: 94%;
+		margin: 0 3%;
 	}
 
 
@@ -341,8 +347,8 @@ Run the tests:
 
 
 ## Release History
-0.1.0
-0.2.0 - Added Android Support
-0.2.1 - Added FastClick functionality + fixed ie10 bug
-0.3.0 - Added iScroll plugin compatibility (released as separate plugin)
-0.3.1 - Render callback bug fix
+* 0.1.0
+* 0.2.0 - Added Android Support
+* 0.2.1 - Added FastClick functionality + fixed ie10 bug
+* 0.3.0 - Added iScroll plugin compatibility (released as separate plugin)
+* 0.3.1 - Render callback bug fix

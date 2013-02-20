@@ -72,23 +72,25 @@ define(['backbone'], factory);
 ### 2. HTML Set Up: Wrapping Divs
 
 #### Either: 1. wrap your container div with the wrapping divs needed manually
+
 ```HTML
-	<div class="threeDTrans-outmost-page-container">
-		<div class="threeDTrans-page-container">
+<div class="threeDTrans-outmost-page-container">
+	<div class="threeDTrans-page-container">
 
-			<!-- your container -->
-			<div class="my-container threeDTrans-page"">
-				<p>my amazing website...</p>
-			</div>
-
+		<!-- your container -->
+		<div class="my-container threeDTrans-page"">
+			<p>my amazing website...</p>
 		</div>
+
 	</div>
+</div>
 ```
 
 #### Or 2. Specify the jquery selector of the containing element when initiliasing the router
+
 ```JavaScript
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
-	var my Router = new threeDRouter({"wrapElement": ".my-container"});
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
+var my Router = new threeDRouter({"wrapElement": ".my-container"});
 ```
 
 ### 3. Make your router inherit from backboneResponsiveCSS3Transitions instead of Backbone.Router
@@ -366,8 +368,7 @@ Run the tests:
 
 
 ## To do
-- Add iScroll functionality so that page transitions always take you to the top of the new page. Currently scrolling is left up to the browser.
-- Add more tests
+- Add iOS support
 
 
 ## Release History

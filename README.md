@@ -254,72 +254,72 @@ var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 
 ## Example Code
 ```HTML
-		<!-- ... -->
-		<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
-	</head>
+	<!-- ... -->
+	<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
+</head>
 
-	<body>
-		<!-- ... -->
+<body>
+	<!-- ... -->
 
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 
-		<script src="backbone.responsiveCSS3transitions.min.js"></script>
+	<script src="backbone.responsiveCSS3transitions.min.js"></script>
 
-		<script>
-		var threeDRouter = backboneResponsiveCSS3Transitions.extend({
-			initialize: function (opts) {
-				// ...
-			},
-			routes: {
-				// ... your own route logic here
-				"*default": "loadView",
-			},
-			loadView: function (viewFragment) {
+	<script>
+	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
+		initialize: function (opts) {
+			// ...
+		},
+		routes: {
+			// ... your own route logic here
+			"*default": "loadView",
+		},
+		loadView: function (viewFragment) {
 
-				var myBackboneView = Backbone.View.extend({
-					className: 'my-container',
-					template: 'application.ejs',
-					loadTemplate: function (vars, name, dir) {
-						var self = this;
-						vars = vars || {};
-						dir = dir || 'scripts/templates/';
-						name = name || this.template;
-						return $.get(dir + name).pipe(function (tmpl) {
-							tmpl = _.template(tmpl);
-							self.$el.html(tmpl(vars));
-							self.trigger('render');
-						});
-					},
-					render: function () {
-						this.loadTemplate({ foo: urlParams});
-					}
-				}),
-				options = {
-					direction: "forwards",
-					renderParams: "imprenderParams",
-					viewInitOps: {
-						"yourImportantViewInitUpVars" : "here"
-					}
-				};
+			var myBackboneView = Backbone.View.extend({
+				className: 'my-container',
+				template: 'application.ejs',
+				loadTemplate: function (vars, name, dir) {
+					var self = this;
+					vars = vars || {};
+					dir = dir || 'scripts/templates/';
+					name = name || this.template;
+					return $.get(dir + name).pipe(function (tmpl) {
+						tmpl = _.template(tmpl);
+						self.$el.html(tmpl(vars));
+						self.trigger('render');
+					});
+				},
+				render: function () {
+					this.loadTemplate({ foo: urlParams});
+				}
+			}),
+			options = {
+				direction: "forwards",
+				renderParams: "imprenderParams",
+				viewInitOps: {
+					"yourImportantViewInitUpVars" : "here"
+				}
+			};
 
-				// ... your own route logic here
+			// ... your own route logic here
 
-				this.triggerTransition(myBackboneView, options);
-			}
-		});
+			this.triggerTransition(myBackboneView, options);
+		}
+	});
 
-		var options = {
-				"renderCallback": true,
-				"wrapElement": ".my-container"
-			},
-		myRouter = new threeDRouter(options);
+	var options = {
+			"renderCallback": true,
+			"wrapElement": ".my-container"
+		},
+	myRouter = new threeDRouter(options);
 
-		Backbone.history.start();
+	Backbone.history.start();
 
-		</script>
-	</body>
+	</script>
+</body>
 ```
 
 ## Centered Designs with outer gutters

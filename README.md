@@ -27,7 +27,7 @@ me@badass:~$ jam install backbone.responsiveCSS3transitions
 ```
 or [Bower](https://npmjs.org/package/bower):
 ```Shell
-	me@badass:~$ bower install backbone.responsiveCSS3transitions
+me@badass:~$ bower install backbone.responsiveCSS3transitions
 ```
 
 ## Plugins
@@ -43,14 +43,12 @@ or [Bower](https://npmjs.org/package/bower):
 
 ## Getting Started
 ### 1. Load the Javascript and CSS
+
 ```HTML
-	<!-- ... -->
 	<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
 </head>
 
 <body>
-	<!-- ... -->
-
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
@@ -94,38 +92,39 @@ define(['backbone'], factory);
 ```
 
 ### 3. Make your router inherit from backboneResponsiveCSS3Transitions instead of Backbone.Router
+
 ```JavaScript
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({...});
-	new threeDRouter();
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({...});
+new threeDRouter();
 
-	// your view....
-	var myBackboneView = Backbone.View.extend({
-		className: 'my-container',
-		render: function () {
-			this.$el.html('the html of the new page to be inserted');
-		}
-	});
-
-	// your router class loading your view
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
-		routes: {
-			"*default": "loadView",
-		},
-		loadView: function (viewFragment) {
-			// ...
-			this.triggerTransition(myBackboneView, options);
-		}
-	});
-
-	// your app instantiaing the router
-	app = {
-		// ...
-		init: function() {
-			new threeDRouter(options);
-			Backbone.history.start();
-		}
+// your view....
+var myBackboneView = Backbone.View.extend({
+	className: 'my-container',
+	render: function () {
+		this.$el.html('the html of the new page to be inserted');
 	}
-	app.init();
+});
+
+// your router class loading your view
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({
+	routes: {
+		"*default": "loadView",
+	},
+	loadView: function (viewFragment) {
+		// ...
+		this.triggerTransition(myBackboneView, options);
+	}
+});
+
+// your app instantiaing the router
+app = {
+	// ...
+	init: function() {
+		new threeDRouter(options);
+		Backbone.history.start();
+	}
+}
+app.init();
 ```
 
 #### Router Instantiation Options
@@ -173,23 +172,24 @@ new threeDRouter({"wrapElement": ".my-container"});
 
 
 ### 4. Use this.triggerTransition(ViewClass, options) in your router's routes' callbacks to trigger the page transition
+
 ```JavaScript
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
-		initialize: function (opts) {
-			// ...
-		},
-		routes: {
-			"*default": "loadView",
-		},
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({
+	initialize: function (opts) {
+		// ...
+	},
+	routes: {
+		"*default": "loadView",
+	},
 
-		loadView: function (viewFragment) {
+	loadView: function (viewFragment) {
 
-			// ... your own route logic here
-			// @param {ViewClass} (mandatory) > the backbone view class that you want to load
-			// @param {options}
-			this.triggerTransition(ViewClass, options);
-		}
-	});
+		// ... your own route logic here
+		// @param {ViewClass} (mandatory) > the backbone view class that you want to load
+		// @param {options}
+		this.triggerTransition(ViewClass, options);
+	}
+});
 ```
 
 #### Parameters

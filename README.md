@@ -22,13 +22,13 @@ Tested to work with the following reponsive CSS frameworks:
 
 ## Install via Package Manager
 Grab from [Jam.js](http://jamjs.org/packages/#/details/backbone.responsiveCSS3transitions):
-
-	me@badass:~$ jam install backbone.responsiveCSS3transitions
-
+```Shell
+me@badass:~$ jam install backbone.responsiveCSS3transitions
+```
 or [Bower](https://npmjs.org/package/bower):
-
+```Shell
 	me@badass:~$ bower install backbone.responsiveCSS3transitions
-
+```
 
 ## Plugins
 ### iScroll4 Plugin
@@ -43,19 +43,20 @@ or [Bower](https://npmjs.org/package/bower):
 
 ## Getting Started
 ### 1. Load the Javascript and CSS
-		<!-- ... -->
-		<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
-	</head>
+```HTML
+	<!-- ... -->
+	<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
+</head>
 
-	<body>
-		<!-- ... -->
+<body>
+	<!-- ... -->
 
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 
-		<script src="backbone.responsiveCSS3transitions.min.js"></script>
-
+	<script src="backbone.responsiveCSS3transitions.min.js"></script>
+```
 #### AMD
 
 ##### Backbone Dependency
@@ -63,16 +64,17 @@ Plugin relies upon 'backbone' as a dependency. Make sure that this is set up in 
 
 ##### Fastclick Dependency
 If you want to use the fastclick functionality with an AMD set up then you should set up your shim config as with backbone and then edit the AMD definition in backbone.responsiveCSS3transitions.js
-
-		//...... top of backbone.responsiveCSS3transitions.js file
-		define(['backbone'], factory);
-		// if using fastclick then replace the line above with this:
-		// define(['backbone', 'fastclick'], factory);
-
+```JavaScript
+//...... top of backbone.responsiveCSS3transitions.js file
+define(['backbone'], factory);
+// if using fastclick then replace the line above with this:
+// define(['backbone', 'fastclick'], factory);
+```
 
 ### 2. HTML Set Up: Wrapping Divs
 
 #### Either: 1. wrap your container div with the wrapping divs needed manually
+```HTML
 	<div class="threeDTrans-outmost-page-container">
 		<div class="threeDTrans-page-container">
 
@@ -83,14 +85,16 @@ If you want to use the fastclick functionality with an AMD set up then you shoul
 
 		</div>
 	</div>
+```
 
 #### Or 2. Specify the jquery selector of the containing element when initiliasing the router
+```JavaScript
 	var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
 	var my Router = new threeDRouter({"wrapElement": ".my-container"});
-
+```
 
 ### 3. Make your router inherit from backboneResponsiveCSS3Transitions instead of Backbone.Router
-
+```JavaScript
 	var threeDRouter = backboneResponsiveCSS3Transitions.extend({...});
 	new threeDRouter();
 
@@ -122,7 +126,7 @@ If you want to use the fastclick functionality with an AMD set up then you shoul
 		}
 	}
 	app.init();
-
+```
 
 #### Router Instantiation Options
 
@@ -133,26 +137,29 @@ If you want to use the fastclick functionality with an AMD set up then you shoul
 * accepts: boolean
 * description: make the page transitions wait for the render event to be emitted before triggering the page animation. Useful if you're loading templates with ajax.
 
-		// ... set the renderCallback option to true when initialising your router
-		var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
-		threeDRouter = new threeDRouter({"renderCallback": true});
+```JavaScript
+// ... set the renderCallback option to true when initialising your router
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
+threeDRouter = new threeDRouter({"renderCallback": true});
 
-		// ...in your view class...
-		var myBackboneView = Backbone.View.extend({
-			// ...
-			render: function () {
-				// ...
-				this.trigger('render');
-			}
-		});
-
+// ...in your view class...
+var myBackboneView = Backbone.View.extend({
+	// ...
+	render: function () {
+		// ...
+		this.trigger('render');
+	}
+});
+```
 
 ##### @param {options.wrapElement}
 * accepts: boolean
 * description: the jquery selector of the html element that contains your content. If you want the js to take care of adding the wrapping divs then set this. **** If you choose this option then the html element must be present on the page when the router is instantiated. If it is inside one of your backbone views that hasn't been loaded onto the page yet on first page load then it will fail miserably ****
 
-		var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
-		new threeDRouter({"wrapElement": ".my-container"});
+```JavaScript
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({....});
+new threeDRouter({"wrapElement": ".my-container"});
+```
 
 ##### @param {options.fastClick}
 * accepts: fastClick function/constructor
@@ -166,7 +173,7 @@ If you want to use the fastclick functionality with an AMD set up then you shoul
 
 
 ### 4. Use this.triggerTransition(ViewClass, options) in your router's routes' callbacks to trigger the page transition
-
+```JavaScript
 	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
 		initialize: function (opts) {
 			// ...
@@ -183,6 +190,7 @@ If you want to use the fastclick functionality with an AMD set up then you shoul
 			this.triggerTransition(ViewClass, options);
 		}
 	});
+```
 
 #### Parameters
 
@@ -224,23 +232,26 @@ The default is no transition ie just replace html.
 - default: moving from #sports/football to #sports/rugby
 
 #### You can manually override this by specifying the direction yourself when calling the this.triggerTransition() method, eg:
-	var threeDRouter = backboneResponsiveCSS3Transitions.extend({
-		// ...
-		routes: {
-			"*default": "loadView",
-		},
-		loadView: function (viewFragment) {
-			if (viewFragment.match(/foobar/)) {
-				this.triggerTransition(myView, {"direction": "forwards"});
-			} else {
-				this.triggerTransition(myView);
-			}
-		}
-	});
 
+```JavaScript
+var threeDRouter = backboneResponsiveCSS3Transitions.extend({
+	// ...
+	routes: {
+		"*default": "loadView",
+	},
+	loadView: function (viewFragment) {
+		if (viewFragment.match(/foobar/)) {
+			this.triggerTransition(myView, {"direction": "forwards"});
+		} else {
+			this.triggerTransition(myView);
+		}
+	}
+});
+```
 
 
 ## Example Code
+```HTML
 		<!-- ... -->
 		<link rel="stylesheet" href="scripts/vendor/backbone.responsiveCSS3transitions.min.css"/>
 	</head>
@@ -307,22 +318,24 @@ The default is no transition ie just replace html.
 
 		</script>
 	</body>
-
+```
 
 ## Centered Designs with outer gutters
 As used in all the [demos](http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions).
 
 Apply the margins to the target wrapping element, eg:
+```JavaScript
+// specify the wrapping div when instantiating the router...
+new threeDRouter({"wrapElement": ".my-container"});
+```
 
-	// specify the wrapping div when instantiating the router...
-	new threeDRouter({"wrapElement": ".my-container"});
-
-	// in your stylesheet...
-	.my-container {
-		width: 94%;
-		margin: 0 3%;
-	}
-
+in your stylesheet...
+```CSS
+.my-container {
+	width: 94%;
+	margin: 0 3%;
+}
+```
 
 ## Caveats / Gotchas / Why isn't it working???
 1. Ensure that your Backbone Views have a render method
@@ -333,11 +346,15 @@ If your view emits a render event and you would like the page animation to be de
 4. If you want the js to take care of adding the wrapping divs then the html element must be present on the page when the router is instantiated.
 5. The wrapping element's immediate children should have 100% width for gutter effect to work
 ie this works
+```CSS
 	.wrapper {width: 90%; margin: 0 auto;}
 	.child {width:auto;}
+```
 ie this WON'T work
+```CSS
 	.wrapper {width: 100%;}
 	.child {padding:0 15%;}
+```
 
 
 

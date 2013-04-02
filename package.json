@@ -2,7 +2,7 @@
   "name": "backbone.responsiveCSS3transitions",
   "title": "Backbone Responsive CSS3 Page Transitions",
   "description": "Adds responsive hardware accelerated CSS3 page transitions to backbone.",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "engines": {
     "node": ">=0.8"
   },

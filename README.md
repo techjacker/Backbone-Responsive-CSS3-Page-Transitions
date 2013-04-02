@@ -1,5 +1,7 @@
 # Backbone Responsive CSS3 Page Transitions
 
+[![Build Status](https://secure.travis-ci.org/techjacker/Backbone-Responsive-CSS3-Page-Transitions.png)](http://travis-ci.org/techjacker/Backbone-Responsive-CSS3-Page-Transitions)
+
 Adds responsive* CSS3 page transitions to backbone.
 - Works on Chrome 12+, Safari 4+, Firefox 14+, ie 10+, Android 2.1+
 - Lightweight: 3k (minified + gzipped)

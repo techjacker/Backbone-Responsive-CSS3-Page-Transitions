@@ -361,9 +361,16 @@ ie this WON'T work
 
 
 ## Tests
-Run the tests:
+Run the tests via npm:
 
-1. $ node server.js
+	$ npm test
+
+Run the tests via browser:
+
+1. fire up a node http server
+
+		$ node server.js
+
 2. go to http://0.0.0.0:8124/test.html
 
 
@@ -377,3 +384,4 @@ Run the tests:
 * 0.2.1 - Added FastClick functionality + fixed ie10 bug
 * 0.3.0 - Added iScroll plugin compatibility (released as separate plugin)
 * 0.3.1 - Render callback bug fix
+* 0.3.2 - Add travis CI

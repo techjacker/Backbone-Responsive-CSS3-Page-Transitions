@@ -2,7 +2,13 @@
   "name": "backbone.responsiveCSS3transitions",
   "title": "Backbone Responsive CSS3 Page Transitions",
   "description": "Adds responsive hardware accelerated CSS3 page transitions to backbone.",
-  "version": "0.3.1",
+  "version": "0.3.2",
+  "engines": {
+    "node": ">=0.8"
+  },
+  "scripts": {
+    "test": "grunt qunit --verbose"
+  },
   "homepage": "http://projects.andrewgriffithsonline.com/#backbone-responsive-CSS3-page-transitions",
   "author": "Andrew Griffiths",
   "maintainers": [

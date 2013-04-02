@@ -363,8 +363,9 @@ ie this WON'T work
 
 
 ## Tests
-Run the tests via npm:
+Run the tests via command line:
 
+	$ npm install
 	$ npm test
 
 Run the tests via browser:
@@ -382,8 +383,9 @@ Run the tests via browser:
 
 ## Release History
 * 0.1.0
-* 0.2.0 - Added Android Support
-* 0.2.1 - Added FastClick functionality + fixed ie10 bug
-* 0.3.0 - Added iScroll plugin compatibility (released as separate plugin)
-* 0.3.1 - Render callback bug fix
-* 0.3.2 - Add travis CI
+* 0.2.0 	- Added Android Support
+* 0.2.1 	- Added FastClick functionality + fixed ie10 bug
+* 0.3.0 	- Added iScroll plugin compatibility (released as separate plugin)
+* 0.3.1 	- Render callback bug fix
+* 0.3.2-3 	- Add travis CI
+* 0.3.4 	- Update dev dependencies
